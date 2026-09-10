@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="km">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Khmer Calculator - ម៉ាស៊ីនគិតលេខ</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <div class="calculator">
+            <div class="display-container">
+                <input type="text" id="display" class="display" readonly placeholder="០" value="०">
+            </div>
+            
+            <div class="buttons-grid">
+                <!-- Row 1 -->
+                <button class="btn btn-function" data-action="clear">C</button>
+                <button class="btn btn-function" data-action="delete">⌫</button>
+                <button class="btn btn-function" data-action="percent">%</button>
+                <button class="btn btn-operator" data-operator="/">÷</button>
+
+                <!-- Row 2 -->
+                <button class="btn btn-number" data-number="7">៧</button>
+                <button class="btn btn-number" data-number="8">៨</button>
+                <button class="btn btn-number" data-number="9">៩</button>
+                <button class="btn btn-operator" data-operator="*">×</button>
+
+                <!-- Row 3 -->
+                <button class="btn btn-number" data-number="4">៤</button>
+                <button class="btn btn-number" data-number="5">៥</button>
+                <button class="btn btn-number" data-number="6">៦</button>
+                <button class="btn btn-operator" data-operator="-">−</button>
+
+                <!-- Row 4 -->
+                <button class="btn btn-number" data-number="1">១</button>
+                <button class="btn btn-number" data-number="2">២</button>
+                <button class="btn btn-number" data-number="3">៣</button>
+                <button class="btn btn-operator" data-operator="+">+</button>
+
+                <!-- Row 5 -->
+                <button class="btn btn-number btn-zero" data-number="0">០</button>
+                <button class="btn btn-number" data-number=".">.</button>
+                <button class="btn btn-equals" data-action="equals">=</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
