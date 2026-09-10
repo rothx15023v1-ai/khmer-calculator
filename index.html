@@ -4,7 +4,206 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Khmer Calculator - ម៉ាស៊ីនគិតលេខ</title>
-    <link rel="stylesheet" href="styles.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 20px;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 350px;
+        }
+
+        .calculator {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 30px;
+            padding: 20px;
+            box-shadow: 
+                0 8px 32px 0 rgba(31, 38, 135, 0.37),
+                inset 0 1px 1px 0 rgba(255, 255, 255, 0.3);
+        }
+
+        .display-container {
+            margin-bottom: 25px;
+            padding: 15px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .display {
+            width: 100%;
+            padding: 20px;
+            font-size: 2.5rem;
+            text-align: right;
+            background: transparent;
+            border: none;
+            color: white;
+            font-weight: 300;
+            outline: none;
+            letter-spacing: 2px;
+        }
+
+        .display::placeholder {
+            color: rgba(255, 255, 255, 0.5);
+        }
+
+        .buttons-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 12px;
+        }
+
+        .btn {
+            padding: 18px;
+            font-size: 1.5rem;
+            border: none;
+            border-radius: 18px;
+            cursor: pointer;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            color: white;
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+        }
+
+        .btn:hover {
+            background: rgba(255, 255, 255, 0.15);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            box-shadow: 
+                0 8px 25px rgba(0, 0, 0, 0.15),
+                inset 0 1px 1px rgba(255, 255, 255, 0.2);
+            transform: translateY(-2px);
+        }
+
+        .btn:active {
+            background: rgba(255, 255, 255, 0.2);
+            transform: translateY(0);
+            box-shadow: 
+                0 4px 12px rgba(0, 0, 0, 0.1),
+                inset 0 2px 4px rgba(255, 255, 255, 0.1);
+        }
+
+        .btn-number {
+            background: rgba(255, 255, 255, 0.15);
+        }
+
+        .btn-number:hover {
+            background: rgba(255, 255, 255, 0.25);
+        }
+
+        .btn-operator {
+            background: rgba(102, 126, 234, 0.3);
+            border: 1px solid rgba(102, 126, 234, 0.5);
+        }
+
+        .btn-operator:hover {
+            background: rgba(102, 126, 234, 0.5);
+            border: 1px solid rgba(102, 126, 234, 0.7);
+            box-shadow: 
+                0 8px 25px rgba(102, 126, 234, 0.3),
+                inset 0 1px 1px rgba(255, 255, 255, 0.2);
+        }
+
+        .btn-operator:active {
+            background: rgba(102, 126, 234, 0.6);
+        }
+
+        .btn-function {
+            background: rgba(255, 107, 107, 0.2);
+            border: 1px solid rgba(255, 107, 107, 0.4);
+        }
+
+        .btn-function:hover {
+            background: rgba(255, 107, 107, 0.35);
+            border: 1px solid rgba(255, 107, 107, 0.6);
+            box-shadow: 
+                0 8px 25px rgba(255, 107, 107, 0.2),
+                inset 0 1px 1px rgba(255, 255, 255, 0.2);
+        }
+
+        .btn-function:active {
+            background: rgba(255, 107, 107, 0.45);
+        }
+
+        .btn-equals {
+            background: rgba(76, 175, 80, 0.3);
+            border: 1px solid rgba(76, 175, 80, 0.5);
+            grid-column: span 2;
+        }
+
+        .btn-equals:hover {
+            background: rgba(76, 175, 80, 0.5);
+            border: 1px solid rgba(76, 175, 80, 0.7);
+            box-shadow: 
+                0 8px 25px rgba(76, 175, 80, 0.3),
+                inset 0 1px 1px rgba(255, 255, 255, 0.2);
+        }
+
+        .btn-equals:active {
+            background: rgba(76, 175, 80, 0.6);
+        }
+
+        .btn-zero {
+            grid-column: span 1;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 480px) {
+            .calculator {
+                padding: 15px;
+            }
+
+            .display {
+                font-size: 2rem;
+            }
+
+            .btn {
+                padding: 15px;
+                font-size: 1.3rem;
+            }
+
+            .buttons-grid {
+                gap: 10px;
+            }
+        }
+
+        /* Dark mode support */
+        @media (prefers-color-scheme: dark) {
+            .calculator {
+                background: rgba(0, 0, 0, 0.2);
+            }
+
+            .display-container {
+                background: rgba(0, 0, 0, 0.1);
+            }
+
+            .btn {
+                background: rgba(255, 255, 255, 0.08);
+            }
+
+            .btn:hover {
+                background: rgba(255, 255, 255, 0.12);
+            }
+        }
+    </style>
 </head>
 <body>
     <div class="container">
@@ -34,7 +233,7 @@
 
                 <!-- Row 4 -->
                 <button class="btn btn-number" data-number="1">១</button>
-                <button class="btn btn-number" data-number="2">២</button>
+                <button class="btn btn-number" data-number="2">២ </button>
                 <button class="btn btn-number" data-number="3">៣</button>
                 <button class="btn btn-operator" data-operator="+">+</button>
 
@@ -46,6 +245,156 @@
         </div>
     </div>
 
-    <script src="script.js"></script>
+    <script>
+        const display = document.getElementById('display');
+        const numberButtons = document.querySelectorAll('[data-number]');
+        const operatorButtons = document.querySelectorAll('[data-operator]');
+        const functionButtons = document.querySelectorAll('[data-action]');
+
+        // Khmer number mapping
+        const khmerNumbers = {
+            '0': '០', '1': '១', '2': '២', '3': '៣', '4': '៤',
+            '5': '៥', '6': '៦', '7': '៧', '8': '៨', '9': '៩'
+        };
+
+        const arabicNumbers = {
+            '០': '0', '១': '1', '២': '2', '៣': '3', '៤': '4',
+            '៥': '5', '៦': '6', '៧': '7', '៨': '8', '៩': '9'
+        };
+
+        let currentValue = '0';
+        let previousValue = '';
+        let operator = null;
+        let shouldResetDisplay = false;
+
+        function convertToArabic(khmerStr) {
+            return khmerStr.split('').map(char => arabicNumbers[char] || char).join('');
+        }
+
+        function convertToKhmer(arabicStr) {
+            return arabicStr.split('').map(char => khmerNumbers[char] || char).join('');
+        }
+
+        function updateDisplay() {
+            display.value = convertToKhmer(currentValue);
+        }
+
+        function handleNumber(number) {
+            if (shouldResetDisplay) {
+                currentValue = number;
+                shouldResetDisplay = false;
+            } else {
+                currentValue = currentValue === '0' && number !== '.' ? number : currentValue + number;
+            }
+            updateDisplay();
+        }
+
+        function handleOperator(op) {
+            if (operator !== null && !shouldResetDisplay) {
+                calculate();
+            }
+            previousValue = currentValue;
+            operator = op;
+            shouldResetDisplay = true;
+        }
+
+        function calculate() {
+            if (operator === null || shouldResetDisplay) return;
+
+            let result;
+            const prev = parseFloat(previousValue);
+            const current = parseFloat(currentValue);
+
+            switch (operator) {
+                case '+':
+                    result = prev + current;
+                    break;
+                case '-':
+                    result = prev - current;
+                    break;
+                case '*':
+                    result = prev * current;
+                    break;
+                case '/':
+                    result = current !== 0 ? prev / current : 0;
+                    break;
+                default:
+                    return;
+            }
+
+            currentValue = result.toString();
+            operator = null;
+            shouldResetDisplay = true;
+            updateDisplay();
+        }
+
+        function clear() {
+            currentValue = '0';
+            previousValue = '';
+            operator = null;
+            shouldResetDisplay = false;
+            updateDisplay();
+        }
+
+        function deleteLastChar() {
+            if (currentValue.length > 1) {
+                currentValue = currentValue.slice(0, -1);
+            } else {
+                currentValue = '0';
+            }
+            updateDisplay();
+        }
+
+        function handlePercent() {
+            currentValue = (parseFloat(currentValue) / 100).toString();
+            updateDisplay();
+        }
+
+        // Event listeners
+        numberButtons.forEach(btn => {
+            btn.addEventListener('click', () => {
+                handleNumber(btn.dataset.number);
+            });
+        });
+
+        operatorButtons.forEach(btn => {
+            btn.addEventListener('click', () => {
+                handleOperator(btn.dataset.operator);
+            });
+        });
+
+        functionButtons.forEach(btn => {
+            btn.addEventListener('click', () => {
+                const action = btn.dataset.action;
+                if (action === 'clear') clear();
+                else if (action === 'delete') deleteLastChar();
+                else if (action === 'percent') handlePercent();
+                else if (action === 'equals') {
+                    calculate();
+                    operator = null;
+                }
+            });
+        });
+
+        // Keyboard support
+        document.addEventListener('keydown', (e) => {
+            if (e.key >= '0' && e.key <= '9') handleNumber(e.key);
+            else if (e.key === '+' || e.key === '-' || e.key === '*' || e.key === '/') {
+                e.preventDefault();
+                handleOperator(e.key);
+            }
+            else if (e.key === '.') handleNumber('.');
+            else if (e.key === 'Enter' || e.key === '=') {
+                e.preventDefault();
+                calculate();
+                operator = null;
+            }
+            else if (e.key === 'Backspace') deleteLastChar();
+            else if (e.key === 'Escape') clear();
+        });
+
+        // Initialize
+        updateDisplay();
+    </script>
 </body>
 </html>
